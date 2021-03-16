@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Hexo</title>
+  <meta name="description" content="数据库与ORMDatabase核心架构Laravel主要有两种方式与数据库进行交互：  DB , DB是与 PHP 底层的 PDO 直接进行交互的，通过查询构建器提供了一个方便的接口来创建及运行数据库查询语句。  Eloquent Model,  Eloquent 是建立在 DB 的查询构建器基础之上，对数据库进行了抽象的 ORM，功能十分丰富让我们可以避免写复杂的 SQL 语句，并用优雅的方式解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据库与ORMDatabase核心架构Laravel主要有两种方式与数据库进行交互：  DB , DB是与 PHP 底层的 PDO 直接进行交互的，通过查询构建器提供了一个方便的接口来创建及运行数据库查询语句。  Eloquent Model,  Eloquent 是建立在 DB 的查询构建器基础之上，对数据库进行了抽象的 ORM，功能十分丰富让我们可以避免写复杂的 SQL 语句，并用优雅的方式解">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-18T05:39:35.721Z">
+<meta property="article:modified_time" content="2020-11-03T03:35:43.621Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/03/16/hello-world/" class="title">Hello World</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-16T03:32:39.417Z" itemprop="datePublished">2021-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-18T05:39:35.721Z" itemprop="datePublished">2020-09-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/21/laravel%E6%BA%90%E7%A0%81-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-21T11:32:38.232Z" itemprop="datePublished">2020-07-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/21/Linux%20Tip/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-21T11:28:39.716Z" itemprop="datePublished">2020-07-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/21/nginx/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-21T11:25:06.420Z" itemprop="datePublished">2020-07-21</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-laravel源码-数据库和ORM" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/" class="article-date">
+	  <time datetime="2020-09-18T05:39:35.721Z" itemprop="datePublished">2020-09-18</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="数据库与ORM"><a href="#数据库与ORM" class="headerlink" title="数据库与ORM"></a>数据库与ORM</h1><h2 id="Database核心架构"><a href="#Database核心架构" class="headerlink" title="Database核心架构"></a>Database核心架构</h2><p>Laravel主要有两种方式与数据库进行交互：</p>
+<ul>
+<li><p><code>DB</code> , <code>DB</code>是与 PHP 底层的 <code>PDO </code>直接进行交互的，通过查询构建器提供了一个方便的接口来创建及运行数据库查询语句。</p>
+</li>
+<li><p><code>Eloquent Model</code>,  <code>Eloquent</code> 是建立在 <code>DB</code> 的查询构建器基础之上，对数据库进行了抽象的 <code>ORM</code>，功能十分丰富让我们可以避免写复杂的 SQL 语句，并用优雅的方式解决了数据表之间的关联关系。</p>
+</li>
+</ul>
+<p>上面说的这两个部分都包括在了 <code>Illuminate/Database</code> 包里面，除了作为 Laravel 的数据库层 <code>Illuminate/Database</code>还是一个 PHP 数据库工具集， 在任何项目里你都可以通过<code> composer install illuminate/databse</code> 安装并使用它。</p>
+<h3 id="Database-服务注册与初始化"><a href="#Database-服务注册与初始化" class="headerlink" title="Database 服务注册与初始化"></a>Database 服务注册与初始化</h3><p>Database是作为一种服务注册到服务容器里提供给Laravel应用使用的，他的服务提供容器是<code>Iluminate\Database\DatabaseServiceProvider</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置连接分析器和事件分发器</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Model::setConnectionResolver(<span class="keyword">$this</span>-&gt;app[<span class="string">&#x27;db&#x27;</span>]);</span><br><span class="line"></span><br><span class="line">    Model::setEventDispatcher(<span class="keyword">$this</span>-&gt;app[<span class="string">&#x27;events&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//清除掉已经 booted的Model和全局查询作用域</span></span><br><span class="line">    Model::clearBootedModels();</span><br><span class="line">		<span class="comment">//注册ConnectionServices</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;registerConnectionServices();</span><br><span class="line">		<span class="comment">//注册Eloquent工厂</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;registerEloquentFactory();</span><br><span class="line">		</span><br><span class="line">    <span class="keyword">$this</span>-&gt;registerQueueableEntityResolver();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">clearBootedModels</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">static</span>::<span class="variable">$booted</span> = [];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">static</span>::<span class="variable">$globalScopes</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerConnectionServices</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 连接工厂用于在数据库上创建实际的连接实例。我们将把工厂注入管理器，以便它可以在实际需要时（而不是以前）建立连接。（依赖注入使其能延迟加载）</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;singleton(<span class="string">&#x27;db.factory&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$app</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ConnectionFactory(<span class="variable">$app</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据库管理器用于解析各种连接，因为可以管理多个连接。它还实现了连接解析器接口，该接口可被其他需要连接的组件使用。</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;singleton(<span class="string">&#x27;db&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$app</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DatabaseManager(<span class="variable">$app</span>, <span class="variable">$app</span>[<span class="string">&#x27;db.factory&#x27;</span>]);</span><br><span class="line">    &#125;);</span><br><span class="line">		<span class="comment">//数据库连接实例，是与底层PDO接口交互的底层类</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;bind(<span class="string">&#x27;db.connection&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$app</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$app</span>[<span class="string">&#x27;db&#x27;</span>]-&gt;connection();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//所以 DatabaseManager 作为接口与外部交互，在应用需要时通过 ConnectionFactory 创建了数据库连接实例，最后执行数据库的增删改查是由数据库连接实例来完成的。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerEloquentFactory</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;singleton(FakerGenerator::class, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$app</span>, <span class="variable">$parameters</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$locale</span> = <span class="variable">$parameters</span>[<span class="string">&#x27;locale&#x27;</span>] ?? <span class="variable">$app</span>[<span class="string">&#x27;config&#x27;</span>]-&gt;get(<span class="string">&#x27;app.faker_locale&#x27;</span>, <span class="string">&#x27;en_US&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="built_in">static</span>::<span class="variable">$fakers</span>[<span class="variable">$locale</span>])) &#123;</span><br><span class="line">            <span class="built_in">static</span>::<span class="variable">$fakers</span>[<span class="variable">$locale</span>] = FakerFactory::create(<span class="variable">$locale</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">static</span>::<span class="variable">$fakers</span>[<span class="variable">$locale</span>]-&gt;unique(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">static</span>::<span class="variable">$fakers</span>[<span class="variable">$locale</span>];</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;singleton(EloquentFactory::class, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$app</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EloquentFactory::construct(</span><br><span class="line">            <span class="variable">$app</span>-&gt;make(FakerGenerator::class), <span class="keyword">$this</span>-&gt;app-&gt;databasePath(<span class="string">&#x27;factories&#x27;</span>)</span><br><span class="line">        );</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//注册可排队实体解析器实现。</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerQueueableEntityResolver</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;singleton(EntityResolver::class, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> QueueEntityResolver;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DatabaseManager"><a href="#DatabaseManager" class="headerlink" title="DatabaseManager"></a>DatabaseManager</h3><p>DatabaseManager是整个数据库服务的接口，我们通过<code>DB</code>门面进行操作时，实际上调用的就是DatabaseManager，它会通过数据库连接对象工厂（connectionFactory）获得数据库连接对象，然后数据库连接对象会进行具体的CURD操作。</p>
+<p>比如我们在程序里执行了<code>DB::table(&#39;user&#39;)-&gt;get()</code>，在DatabaseManager中并没有<code>table</code>方法，这时就会触发<code>__call()</code>魔术函数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DatabaseManager</span> <span class="keyword">implements</span> <span class="title">ConnectionResolverInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$app</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$factory</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$connections</span> = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$method</span>, <span class="variable">$parameters</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;connection()-&gt;<span class="variable">$method</span>(...<span class="variable">$parameters</span>);</span><br><span class="line">    &#125;</span><br><span class="line">		</span><br><span class="line">  	<span class="comment">//没有指定connction是 name为空 connection就会获取到默认的mysql连接对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">connection</span>(<span class="params"><span class="variable">$name</span> = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      	<span class="comment">//解析连接名称</span></span><br><span class="line">      	<span class="comment">//在配置文件为默认情况下 $name 为空时 返回的值为 mysql 和 null</span></span><br><span class="line">        <span class="keyword">list</span>(<span class="variable">$database</span>, <span class="variable">$type</span>) = <span class="keyword">$this</span>-&gt;parseConnectionName(<span class="variable">$name</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable">$name</span> = <span class="variable">$name</span> ?: <span class="variable">$database</span>;</span><br><span class="line">				<span class="comment">//单例</span></span><br><span class="line">        <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;connections[<span class="variable">$name</span>])) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;connections[<span class="variable">$name</span>] = <span class="keyword">$this</span>-&gt;configure(</span><br><span class="line">                <span class="keyword">$this</span>-&gt;makeConnection(<span class="variable">$database</span>), <span class="variable">$type</span></span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;connections[<span class="variable">$name</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  	<span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseConnectionName</span>(<span class="params"><span class="variable">$name</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$name</span> = <span class="variable">$name</span> ?: <span class="keyword">$this</span>-&gt;getDefaultConnection();</span><br><span class="line">				<span class="comment">// 检查connection name 是否以::read, ::write结尾  比如&#x27;ucenter::read&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> Str::endsWith(<span class="variable">$name</span>, [<span class="string">&#x27;::read&#x27;</span>, <span class="string">&#x27;::write&#x27;</span>])</span><br><span class="line">                            ? explode(<span class="string">&#x27;::&#x27;</span>, <span class="variable">$name</span>, <span class="number">2</span>) : [<span class="variable">$name</span>, <span class="literal">null</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDefaultConnection</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      	<span class="comment">//获取默认连接名称</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;app[<span class="string">&#x27;config&#x27;</span>][<span class="string">&#x27;database.default&#x27;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  	<span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">configure</span>(<span class="params">Connection <span class="variable">$connection</span>, <span class="variable">$type</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$connection</span> = <span class="keyword">$this</span>-&gt;setPdoForType(<span class="variable">$connection</span>, <span class="variable">$type</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//首先，我们将设置获取模式和数据库连接的其他一些依赖项。此方法基本上只是配置并准备使其被应用程序使用。完成后，我们将其退回。</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;app-&gt;bound(<span class="string">&#x27;events&#x27;</span>)) &#123;</span><br><span class="line">            <span class="variable">$connection</span>-&gt;setEventDispatcher(<span class="keyword">$this</span>-&gt;app[<span class="string">&#x27;events&#x27;</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//在这里，我们将设置一个reconnector回调。此重新连接器可以是任何可调用的，因此我们将设置一个Closure以使用此连接的名称从此管理器重新连接，这将允许我们从连接重新连接。</span></span><br><span class="line">        <span class="variable">$connection</span>-&gt;setReconnector(<span class="keyword">$this</span>-&gt;reconnector);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$connection</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  	<span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">makeConnection</span>(<span class="params"><span class="variable">$name</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      	<span class="comment">//$name是&#x27;mysql&#x27;情况下, 从config/database.php中获取&#x27;connections.mysql&#x27;的配置</span></span><br><span class="line">        <span class="variable">$config</span> = <span class="keyword">$this</span>-&gt;configuration(<span class="variable">$name</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//首先，我们将通过连接名称进行检查，以查看是否已专门为此连接注册了扩展。如果有，我们将调用Closure，并将其传递给配置以使其能够解析连接。</span></span><br><span class="line">      	<span class="comment">//比如在AppServiceProvider里通过DatabaseManager::extend(&#x27;mysql&#x27;, function () &#123;...&#125;)</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;extensions[<span class="variable">$name</span>])) &#123;</span><br><span class="line">            <span class="keyword">return</span> call_user_func(<span class="keyword">$this</span>-&gt;extensions[<span class="variable">$name</span>], <span class="variable">$config</span>, <span class="variable">$name</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//接下来，我们将检查是否已为驱动程序注册扩展名，如果已注册，则将调用Closure，这将使我们能够为驱动程序本身提供一个更通用的解析器，该解析器适用于所有连接。</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;extensions[<span class="variable">$driver</span> = <span class="variable">$config</span>[<span class="string">&#x27;driver&#x27;</span>]])) &#123;</span><br><span class="line">            <span class="keyword">return</span> call_user_func(<span class="keyword">$this</span>-&gt;extensions[<span class="variable">$driver</span>], <span class="variable">$config</span>, <span class="variable">$name</span>);</span><br><span class="line">        &#125;</span><br><span class="line">				<span class="comment">//通过工厂获取连接实例</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;factory-&gt;make(<span class="variable">$config</span>, <span class="variable">$name</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  	<span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">configuration</span>(<span class="params"><span class="variable">$name</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$name</span> = <span class="variable">$name</span> ?: <span class="keyword">$this</span>-&gt;getDefaultConnection();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//要获取数据库连接配置，我们将仅提取连接配置并获取给定名称的配置。如果配置不存在，我们将抛出异常并保释。</span></span><br><span class="line">        <span class="variable">$connections</span> = <span class="keyword">$this</span>-&gt;app[<span class="string">&#x27;config&#x27;</span>][<span class="string">&#x27;database.connections&#x27;</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (is_null(<span class="variable">$config</span> = Arr::get(<span class="variable">$connections</span>, <span class="variable">$name</span>))) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">InvalidArgumentException</span>(<span class="string">&quot;Database connection [<span class="subst">&#123;$name&#125;</span>] not configured.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">new</span> ConfigurationUrlParser)</span><br><span class="line">                    -&gt;parseConfiguration(<span class="variable">$config</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> makeConnection中调用了ConnectionFatory的make方法来获取连接对象</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">make</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$config</span>, <span class="variable">$name</span> = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$config</span> = <span class="keyword">$this</span>-&gt;parseConfig(<span class="variable">$config</span>, <span class="variable">$name</span>);</span><br><span class="line"></span><br><span class="line">  	<span class="comment">//是否有设置读写分离 如果设置了读写分离，那么就会调用 createReadWriteConnection 函数，生成具有读、写两个功能的 connection；否则的话，就会调用 createSingleConnection 函数，生成普通的连接对象。</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$config</span>[<span class="string">&#x27;read&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;createReadWriteConnection(<span class="variable">$config</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;createSingleConnection(<span class="variable">$config</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseConfig</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$config</span>, <span class="variable">$name</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Arr::add(Arr::add(<span class="variable">$config</span>, <span class="string">&#x27;prefix&#x27;</span>, <span class="string">&#x27;&#x27;</span>), <span class="string">&#x27;name&#x27;</span>, <span class="variable">$name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建单个connection</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">createSingleConnection</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$config</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$pdo</span> = <span class="keyword">$this</span>-&gt;createPdoResolver(<span class="variable">$config</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;createConnection(</span><br><span class="line">        <span class="variable">$config</span>[<span class="string">&#x27;driver&#x27;</span>], <span class="variable">$pdo</span>, <span class="variable">$config</span>[<span class="string">&#x27;database&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;prefix&#x27;</span>], <span class="variable">$config</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建读写两个connection</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">createReadWriteConnection</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$config</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$connection</span> = <span class="keyword">$this</span>-&gt;createSingleConnection(<span class="keyword">$this</span>-&gt;getWriteConfig(<span class="variable">$config</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$connection</span>-&gt;setReadPdo(<span class="keyword">$this</span>-&gt;createReadPdo(<span class="variable">$config</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建数据库连接的方法 createConnection 的 $pdo是一个闭包</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>) <span class="title">use</span> (<span class="params"><span class="variable">$config</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;createConnector(<span class="variable">$config</span>)-&gt;connect(<span class="variable">$config</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h3><p>在<code>illuminate/database</code>中连接器Connector是专门负责与PDO交互连接数据库的。createConnector方法会创建连接器：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createConnector</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$config</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="variable">$config</span>[<span class="string">&#x27;driver&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">InvalidArgumentException</span>(<span class="string">&#x27;A driver must be specified.&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;container-&gt;bound(<span class="variable">$key</span> = <span class="string">&quot;db.connector.<span class="subst">&#123;$config[&#x27;driver&#x27;]&#125;</span>&quot;</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;container-&gt;make(<span class="variable">$key</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (<span class="variable">$config</span>[<span class="string">&#x27;driver&#x27;</span>]) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;mysql&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> MySqlConnector;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;pgsql&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> PostgresConnector;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;sqlite&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SQLiteConnector;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;sqlsrv&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SqlServerConnector;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">InvalidArgumentException</span>(<span class="string">&quot;Unsupported driver [<span class="subst">&#123;$config[&#x27;driver&#x27;]&#125;</span>]&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//mysql的连接器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySqlConnector</span> <span class="keyword">extends</span> <span class="title">Connector</span> <span class="keyword">implements</span> <span class="title">ConnectorInterface</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$config</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//生成PDO连接数据库时用的DSN连接字符串</span></span><br><span class="line">        <span class="variable">$dsn</span> = <span class="keyword">$this</span>-&gt;getDsn(<span class="variable">$config</span>);</span><br><span class="line">        <span class="comment">//获取要传给PDO的选项参数</span></span><br><span class="line">        <span class="variable">$options</span> = <span class="keyword">$this</span>-&gt;getOptions(<span class="variable">$config</span>);</span><br><span class="line">        <span class="comment">//创建一个PDO连接对象</span></span><br><span class="line">        <span class="variable">$connection</span> = <span class="keyword">$this</span>-&gt;createConnection(<span class="variable">$dsn</span>, <span class="variable">$config</span>, <span class="variable">$options</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (! <span class="keyword">empty</span>(<span class="variable">$config</span>[<span class="string">&#x27;database&#x27;</span>])) &#123;</span><br><span class="line">         <span class="variable">$connection</span>-&gt;exec(<span class="string">&quot;use `<span class="subst">&#123;$config[&#x27;database&#x27;]&#125;</span>`;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//为连接设置字符集和collation</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;configureEncoding(<span class="variable">$connection</span>, <span class="variable">$config</span>);</span><br><span class="line">        <span class="comment">//设置time zone</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;configureTimezone(<span class="variable">$connection</span>, <span class="variable">$config</span>);</span><br><span class="line">        <span class="comment">//为数据库会话设置sql mode</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;setModes(<span class="variable">$connection</span>, <span class="variable">$config</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="variable">$connection</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就通过连接器与 PHP 底层的 PDO 交互连接上数据库了。</p>
+<p>Connection 就是 DatabaseManager 代理的数据库连接对象了， 所以最开始执行的代码 <code>DB::table(&#39;users&#39;)-&gt;get() </code>经过我们上面讲的历程，最终是由 Connection 来完成执行的，table 方法返回了一个 QueryBuilder 对象，这个对象里定义里那些我们经常用到的 <code>where</code>,<code> get</code>,<code>first</code> 等方法， 它会根据调用的方法生成对应的 SQL 语句，最后通过 Connection 对象执行来获得最终的结果。 详细内容我们等到以后讲查询构建器的时候再看。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DB</td>
+<td>DatabaseManager的静态代理。</td>
+</tr>
+<tr>
+<td>DatabaseManager</td>
+<td>Database面向外部的接口，应用中所有与Database有关的操作都是通过与这个接口交互来完成的。</td>
+</tr>
+<tr>
+<td>ConnectionFactory</td>
+<td>创建数据库连接对象的类工厂。</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>数据库连接对象，执行数据库操作最后都是通过它与PHP底层的PDO交互来完成的。</td>
+</tr>
+<tr>
+<td>Connector</td>
+<td>作为Connection的成员专门负责过PDO连接数据库</td>
+</tr>
+</tbody></table>
+<h2 id="查询构造器"><a href="#查询构造器" class="headerlink" title="查询构造器"></a>查询构造器</h2>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/" title="" target="_blank" rel="external">http://example.com/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/03/16/hello-world/" title="Hello World"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/07/21/laravel%E6%BA%90%E7%A0%81-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90/" title="(no title)"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
