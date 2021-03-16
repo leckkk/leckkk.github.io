@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>计算机网络 | Hexo</title>
+  <meta name="description" content="[toc] 计算机网络体系结构   层数 OSI7层 层数 TCP&#x2F;IP的四层协议 层数 五层协议    7 应用层       6 表示层       5 会话层 4 应用层（telnet&#x2F;ftp&#x2F;http&#x2F;smtp） 5 应用层   4 运输层 3 运输层（tcp&#x2F;udp） 4 运输层   3 网络层 2 网络层（ip&#x2F;icmp&#x2F;igmp） 3 网络层   2 数据链路层 1 链路层（以太网驱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络">
+<meta property="og:url" content="http://example.com/2020/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[toc] 计算机网络体系结构   层数 OSI7层 层数 TCP&#x2F;IP的四层协议 层数 五层协议    7 应用层       6 表示层       5 会话层 4 应用层（telnet&#x2F;ftp&#x2F;http&#x2F;smtp） 5 应用层   4 运输层 3 运输层（tcp&#x2F;udp） 4 运输层   3 网络层 2 网络层（ip&#x2F;icmp&#x2F;igmp） 3 网络层   2 数据链路层 1 链路层（以太网驱">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdn.net/20140609125220296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYTE5ODgxMDI5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://c.biancheng.net/uploads/allimg/191111/6-1911111249535K.gif">
+<meta property="article:published_time" content="2020-12-19T07:36:16.651Z">
+<meta property="article:modified_time" content="2021-03-16T04:55:55.565Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20140609125220296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYTE5ODgxMDI5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2020/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/03/16/hello-world/" class="title">Hello World</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-16T03:32:39.417Z" itemprop="datePublished">2021-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="title">计算机网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-19T07:36:16.651Z" itemprop="datePublished">2020-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/" class="title">数据库与ORM</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-18T05:39:35.721Z" itemprop="datePublished">2020-09-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/21/PHP%20%E6%8B%93%E5%B1%95%E5%AE%89%E8%A3%85/" class="title">PHP相关</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-21T11:41:27.856Z" itemprop="datePublished">2020-07-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/21/laravel%E6%BA%90%E7%A0%81-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90/" class="title">自动加载解析</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-21T11:32:38.232Z" itemprop="datePublished">2020-07-21</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-计算机网络" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      计算机网络
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="article-date">
+	  <time datetime="2020-12-19T07:36:16.651Z" itemprop="datePublished">2020-12-19</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>[toc]</p>
+<h2 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a><strong>计算机网络体系结构</strong></h2><table>
+<thead>
+<tr>
+<th>层数</th>
+<th>OSI7层</th>
+<th>层数</th>
+<th>TCP/IP的四层协议</th>
+<th>层数</th>
+<th>五层协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td>应用层</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>表示层</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>会话层</td>
+<td>4</td>
+<td>应用层（telnet/ftp/http/smtp）</td>
+<td>5</td>
+<td>应用层</td>
+</tr>
+<tr>
+<td>4</td>
+<td>运输层</td>
+<td>3</td>
+<td>运输层（tcp/udp）</td>
+<td>4</td>
+<td>运输层</td>
+</tr>
+<tr>
+<td>3</td>
+<td>网络层</td>
+<td>2</td>
+<td>网络层（ip/icmp/igmp）</td>
+<td>3</td>
+<td>网络层</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数据链路层</td>
+<td>1</td>
+<td>链路层（以太网驱动程序）</td>
+<td>2</td>
+<td>数据链路层</td>
+</tr>
+<tr>
+<td>1</td>
+<td>物理层</td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>物理层</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a><strong>运输层</strong></h2><h3 id="TCP与UDP区别"><a href="#TCP与UDP区别" class="headerlink" title="TCP与UDP区别"></a><strong>TCP与UDP区别</strong></h3><ol>
+<li>基于连接和无连接</li>
+<li>对系统资源要求一个多一个少</li>
+<li>TCP保证数据正确性，UDP可能丢包，TCP能保证数据顺序，UDP不保证</li>
+<li>TCP面向字节流，UDP面向报文</li>
+<li>TCP首部20字节，UDP8字节</li>
+<li>TCP一条只能点对点，UDP可以一对一、一对多、多对一、多对多</li>
+<li>UDP没有拥塞控制</li>
+</ol>
+<h3 id="使用udp和tcp的各种应用和应用层协议"><a href="#使用udp和tcp的各种应用和应用层协议" class="headerlink" title="使用udp和tcp的各种应用和应用层协议"></a><strong>使用udp和tcp的各种应用和应用层协议</strong></h3><table>
+<thead>
+<tr>
+<th>应用</th>
+<th>应用层协议</th>
+<th>运输层协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>名字转换</td>
+<td>DNS</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>文件传送</td>
+<td>TFTP（简单文件传送协议）</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>路由选择协议</td>
+<td>RIP（路由信息协议）</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>IP地址配置</td>
+<td>DHCP</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>网络管理</td>
+<td>SNMP（简单网络管理协议）</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>远程文件服务器</td>
+<td>NFS（网络文件系统）</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>多播</td>
+<td>IGMP（网际组管理协议）</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>电子邮件</td>
+<td>SMTP（简单邮件传送协议）</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>远程终端接入</td>
+<td>TELNET（远程终端协议）</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>万维网</td>
+<td>HTTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>文件传送</td>
+<td>FTP</td>
+<td>TCP</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a><strong>TCP</strong></h3><h4 id="TCP报文结构"><a href="#TCP报文结构" class="headerlink" title="TCP报文结构"></a><strong>TCP报文结构</strong></h4><p><img src="https://img-blog.csdn.net/20140609125220296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYTE5ODgxMDI5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<h4 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a><strong>TCP三次握手</strong></h4><p>URG(urgent紧急)</p>
+<p>ACK(Acknowledgement 确认ACK) 1位</p>
+<p>PSH(push传送) 1为</p>
+<p>RST(reset重置) 1位</p>
+<p>SYN(synchronous建立联机) 1位</p>
+<p>FIN(finish结束) 1位</p>
+<p>Sequence number(顺序号码) 4字节</p>
+<p>Acknowledge number(确认号码) 4字节</p>
+<p>第一次握手：主机 A 发送位码为 syn＝1，随机产生 seq number=1234567 的数据包到服务器，主机 B 由 SYN=1 知道，A 要求建立联机；</p>
+<p>SYN=1,seq=x</p>
+<p>第二次握手：主机 B 收到请求后要确认联机信息，向 A 发送 ack number=(主机 A 的 seq+1)，syn=1，ack=1，随机产生 seq=7654321 的包；</p>
+<p>SYN=1,ACK=1,ack=x+1,seq=y</p>
+<p>第三次握手：主机 A 收到后检查 ack number 是否正确，即第一次发送的 seq number+1，以及位码 ack 是否为 1，若正确，主机 A 会再发送 ack number=(主机 B 的 seq+1)，ack=1，主机 B 收到后确认 seq 值与 ack=1 则连接建立成功。</p>
+<p>ACK=1,ack=y+1,seq=x+1</p>
+<h4 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a><strong>TCP四次挥手</strong></h4><hr>
+<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a><strong>UDP</strong></h3><h4 id="UDP报文结构"><a href="#UDP报文结构" class="headerlink" title="UDP报文结构"></a><strong>UDP报文结构</strong></h4><p><img src="http://c.biancheng.net/uploads/allimg/191111/6-1911111249535K.gif" alt="img"></p>
+<h3 id="KCP"><a href="#KCP" class="headerlink" title="KCP"></a><strong>KCP</strong></h3><p>KCP是一个快速可靠协议，能以比 TCP浪费10%-20%的带宽的代价，换取平均延迟降低 30%-40%，且最大延迟降低三倍的传输效果。纯算法实现，并不负责底层协议（如UDP）的收发，需要使用者自己定义下层数据包的发送方式，以 callback的方式提供给 KCP。 连时钟都需要外部传递进来，内部不会有任何一次系统调用。</p>
+<h3 id="mKCP"><a href="#mKCP" class="headerlink" title="mKCP"></a><strong>mKCP</strong></h3><p>vmess魔改的kcp协议</p>
+<hr>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a><strong>应用层</strong></h2><h3 id="HTTP-腾讯云开发者手册-https-cloud-tencent-com-developer-doc-1117"><a href="#HTTP-腾讯云开发者手册-https-cloud-tencent-com-developer-doc-1117" class="headerlink" title="HTTP ([腾讯云开发者手册][https://cloud.tencent.com/developer/doc/1117])"></a><strong>HTTP ([腾讯云开发者手册][<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/doc/1117]">https://cloud.tencent.com/developer/doc/1117]</a>)</strong></h3><p><strong>超文本传输协议</strong>（英语：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：<strong>HTTP</strong>）是一种用于分布式、协作式和超媒体信息系统的应用层协议。</p>
+<p>HTTP通信通常通过TCP/IP连接进行。默认端口为TCP 80，但也可以使用其他端口。这并不排除在Internet或其他网络上的任何其他协议之上实现HTTP。HTTP只假定传输可靠；可以使用任何提供这种保证的协议。</p>
+<p>http请求包括:请求行、请求头、请求体</p>
+<p>http响应包括:响应行、响应头、响应体</p>
+<hr>
+<h4 id="HTTP工作原理"><a href="#HTTP工作原理" class="headerlink" title="HTTP工作原理"></a><strong>HTTP工作原理</strong></h4><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p>
+<p>以下是 HTTP 请求/响应的步骤：</p>
+<p><strong>1. 客户端连接到Web服务器</strong><br>一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。</p>
+<p><strong>2. 发送HTTP请求</strong><br>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
+<p><strong>3. 服务器接受请求并返回HTTP响应</strong><br>Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
+<p><strong>4. 释放连接TCP连接</strong><br>若connection 模式为close，则服务器主动关闭TCP连接，客户端被动关闭连接，释放TCP连接;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
+<p><strong>5. 客户端浏览器解析HTML内容</strong><br>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
+<p>例如：在浏览器地址栏键入URL，按下回车之后会经历以下流程：</p>
+<ol>
+<li>浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址;</li>
+<li>解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立TCP连接;</li>
+<li>浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 TCP 三次握手的第三个报文的数据发送给服务器;</li>
+<li>服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器;</li>
+<li>释放 TCP连接;</li>
+<li>浏览器将该 html 文本并显示内容; 　</li>
+</ol>
+<hr>
+<h4 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a><strong>请求行</strong></h4><p><strong>POST /chapter17/user.html HTTP/1.1</strong></p>
+<p><strong>请求方式</strong> <strong>资源路径</strong> <strong>协议/版本</strong></p>
+<h5 id="请求方法（八种）"><a href="#请求方法（八种）" class="headerlink" title="请求方法（八种）"></a><strong>请求方法（八种）</strong></h5><ul>
+<li><p><strong>GET</strong></p>
+<p>向指定的资源发出“显示”请求。使用GET方法应该只用在读取资料，而不应当被用于产生“副作用”的操作中，例如在网络应用程序中。其中一个原因是GET可能会被网络爬虫等随意访问。参见安全方法。浏览器直接发出的GET只能由一个url触发。GET上要在url之外带一些参数就只能依靠url上附带querystring。</p>
+</li>
+<li><p><strong>POST</strong></p>
+<p>向指定资源提交数据，请求服务器进行处理（例如提交表单或者上传文件）。数据被包含在请求本文中。这个请求可能会创建新的资源或修改现有资源，或二者皆有。每次提交，表单的数据被浏览器用编码到HTTP请求的body里。浏览器发出的POST请求的body主要有两种格式，一种是application/x-www-form-urlencoded用来传输简单的数据，大概就是”key1=value1&amp;key2=value2”这样的格式。另外一种是传文件，会采用multipart/form-data格式。采用后者是因为application/x-www-form-urlencoded的编码方式对于文件这种二进制的数据非常低效。</p>
+</li>
+<li><p><strong>PUT</strong></p>
+<p>向指定资源位置上传其最新内容。</p>
+</li>
+<li><p><strong>DELETE</strong></p>
+<p>请求服务器删除Request-URI所标识的资源。</p>
+</li>
+<li><p><strong>HEAD</strong></p>
+<p>与GET方法一样，都是向服务器发出指定资源的请求。只不过服务器将不传回资源的本文部分。它的好处在于，使用这个方法可以在不必传输全部内容的情况下，就可以获取其中“关于该资源的信息”（元信息或称元数据）。</p>
+</li>
+<li><p><strong>TRACE</strong></p>
+<p>回显服务器收到的请求，主要用于测试或诊断。</p>
+</li>
+<li><p><strong>OPTIONS</strong></p>
+<p>这个方法可使服务器传回该资源所支持的所有HTTP请求方法。用’*’来代替资源名称，向Web服务器发送OPTIONS请求，可以测试服务器功能是否正常运作。</p>
+</li>
+<li><p><strong>CONNECT</strong></p>
+<p>方法名称是区分大小写的。当某个请求所针对的资源不支持对应的请求方法的时候，服务器应当返回状态码405（Method Not Allowed），当服务器不认识或者不支持对应的请求方法的时候，应当返回状态码501（Not Implemented）。</p>
+<p><strong>HTTP服务器至少应该实现GET和HEAD方法</strong>，其他方法都是可选的。当然，所有的方法支持的实现都应当符合下述的方法各自的语义定义。此外，除了上述方法，特定的HTTP服务器还能够扩展自定义的方法。例如：</p>
+</li>
+<li><p><strong>PATCH</strong>（由 <strong>RFC 5789</strong>指定的方法）</p>
+<p>用于将局部修改应用到资源。</p>
+</li>
+</ul>
+<h4 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a><strong>请求头</strong></h4><p>请求头从第二行开始，到第一个空行结束。请求头和请求体之间存在一个空行。</p>
+<p>请求头通常以键值对{key:value}方式传递数据。</p>
+<p>key为规范的固定值。value为key对应的取值，通常是一个值，可能是一组。</p>
+<h5 id="常见请求头属性"><a href="#常见请求头属性" class="headerlink" title="常见请求头属性"></a><strong>常见请求头属性</strong></h5><ul>
+<li>Referer:表示这个请求是从哪个url跳过来的,通过百度来搜索淘宝网,那么在进入淘宝网的请求报文中,Referer的值就是:<a target="_blank" rel="noopener" href="http://www.baidu.com.如果是直接访问就不会有这个头./">www.baidu.com。如果是直接访问就不会有这个头。</a></li>
+<li>Accept:告诉服务端,该请求所能支持的响应媒体类型(MIME type)</li>
+<li>User-Agent:浏览器通知服务器，客户端浏览器与操作系统相关信息</li>
+<li><strong>Connection:表示客户端与服务连接类型；Keep-Alive表示持久连接，close已关闭</strong></li>
+<li>Host:请求的服务器主机名</li>
+<li>Content-Length:请求体的长度</li>
+<li>Content-Type:用于指示所述媒体类型(MIME type)的资源。在请求中，客户端通知服务器实际发送了什么类型的数据。在响应中，告诉客户实际返回的内容的内容类型。</li>
+<li>Cache-Control：指定请求和响应遵循的缓存机制</li>
+</ul>
+<h4 id="请求体"><a href="#请求体" class="headerlink" title="请求体"></a><strong>请求体</strong></h4><p>空行下面的数据</p>
+<h4 id="HTTP版本"><a href="#HTTP版本" class="headerlink" title="HTTP版本"></a><strong>HTTP版本</strong></h4><p><strong>HTTP/0.9</strong></p>
+<p>已过时。只接受GET一种请求方法，没有在通讯中指定版本号，且不支持请求头。由于该版本不支持POST方法，因此客户端无法向服务器传递太多信息。</p>
+<p><strong>HTTP/1.0</strong></p>
+<p>这是第一个在通讯中指定版本号的HTTP协议版本。</p>
+<p><strong>HTTP/1.1</strong>（[RFC 2616][<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/section/1190064]%EF%BC%89">https://cloud.tencent.com/developer/section/1190064]）</a></p>
+<p>默认采用持续连接（Connection: keep-alive），能很好地配合代理服务器工作。还支持以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTTP%E7%AE%A1%E7%BA%BF%E5%8C%96">管道方式</a>在同时发送多个请求，以便降低线路负载，提高传输速度。</p>
+<p>HTTP/1.1相较于HTTP/1.0协议的区别主要体现在：</p>
+<ul>
+<li>缓存处理</li>
+<li>带宽优化及网络连接的使用</li>
+<li>错误通知的管理</li>
+<li>消息在网络中的发送</li>
+<li>互联网地址的维护</li>
+<li>安全性及完整性</li>
+</ul>
+<p><strong>HTTP/2.0</strong></p>
+<p>![image-20210223200751992](/Users/mac/Library/Application Support/typora-user-images/image-20210223200751992.png)</p>
+<p>![image-20210223200825838](/Users/mac/Library/Application Support/typora-user-images/image-20210223200825838.png)</p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a><strong>HTTPS</strong></h3>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2020/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络" target="_blank" rel="external">http://example.com/2020/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/03/16/hello-world/" title="Hello World"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/09/18/laravel%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CORM/" title="数据库与ORM"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
