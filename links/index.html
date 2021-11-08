@@ -17,27 +17,18 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Linux Tip | Leck的吹逼现场</title>
-  <meta name="description" content="添加密钥添加ssh-key 实现免密登陆修改 &#x2F;root&#x2F;.ssh&#x2F;authorized_keys直接在文件中复制入新的 ssh-key mv 命令移动整个目录 包括隐藏文件  使用.[!.]* 而不直接使用* 使用 * 会落下隐藏文件 firewall 常用命令查看防火墙服务的状态  systemctl status firewalld  查看防火墙状态  firewall-cmd –state">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux Tip">
-<meta property="og:url" content="http://leckkk.github.io/2020/07/21/Linux%20Tip/index.html">
+  <title>友情链接 | Leck的吹逼现场</title>
+  <meta property="og:type" content="website">
+<meta property="og:title" content="友情链接">
+<meta property="og:url" content="http://leckkk.github.io/links/index.html">
 <meta property="og:site_name" content="Leck的吹逼现场">
-<meta property="og:description" content="添加密钥添加ssh-key 实现免密登陆修改 &#x2F;root&#x2F;.ssh&#x2F;authorized_keys直接在文件中复制入新的 ssh-key mv 命令移动整个目录 包括隐藏文件  使用.[!.]* 而不直接使用* 使用 * 会落下隐藏文件 firewall 常用命令查看防火墙服务的状态  systemctl status firewalld  查看防火墙状态  firewall-cmd –state">
 <meta property="og:locale">
-<meta property="og:image" content="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p20">
-<meta property="og:image" content="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p21">
-<meta property="og:image" content="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p22">
-<meta property="og:image" content="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p23">
-<meta property="og:image" content="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p24">
-<meta property="og:image" content="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p25">
-<meta property="article:published_time" content="2020-07-21T11:28:39.716Z">
-<meta property="article:modified_time" content="2021-03-16T04:57:34.416Z">
+<meta property="article:published_time" content="2021-11-08T11:41:53.213Z">
+<meta property="article:modified_time" content="2021-11-08T11:41:53.213Z">
 <meta property="article:author" content="leck">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p20">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://leckkk.github.io/2020/07/21/Linux%20Tip/index.html">
+  <link rel="canonical" href="http://leckkk.github.io/links/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Leck的吹逼现场" type="application/atom+xml">
   
@@ -54,7 +45,7 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
-<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center no-sidebar" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -312,189 +303,22 @@
 </aside>
 
   
-  
-<main class="main" role="main">
-  <div class="content">
-  <article id="post-Linux Tip" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-    
-    <div class="article-header">
-      
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Linux Tip
-    </h1>
-  
-
-      
-      <div class="article-meta">
-        <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/07/21/Linux%20Tip/" class="article-date">
-	  <time datetime="2020-07-21T11:28:39.716Z" itemprop="datePublished">2020-28-Tu</time>
-	</a>
-</span>
-        
-        
-
-        
-	<span class="article-read hidden-xs">
-	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
-	    <span id="busuanzi_container_page_pv">
-			<span id="busuanzi_value_page_pv">0</span>
-		</span>
-	</span>
-
-
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/07/21/Linux%20Tip/#comments" class="article-comment-link">Comments</a></span>
-        
-      </div>
-    </div>
-    <div class="article-entry marked-body" itemprop="articleBody">
-      
-        <h4 id="添加密钥"><a href="#添加密钥" class="headerlink" title="添加密钥"></a>添加密钥</h4><p>添加ssh-key 实现免密登陆修改</p>
-<p><em>/root/.ssh/authorized_keys</em>直接在文件中复制入新的 <em>ssh-key</em></p>
-<h4 id="mv-命令"><a href="#mv-命令" class="headerlink" title="mv 命令"></a>mv 命令</h4><p>移动整个目录 包括隐藏文件</p>
-<p><img src="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p20" alt="52666b64010c12521e29dfae5d414d4c.png"></p>
-<p>使用.[!.]* 而不直接使用*</p>
-<p>使用 * 会落下隐藏文件</p>
-<h4 id="firewall-常用命令"><a href="#firewall-常用命令" class="headerlink" title="firewall 常用命令"></a>firewall 常用命令</h4><p>查看防火墙服务的状态</p>
-<blockquote>
-<p>systemctl status firewalld</p>
-</blockquote>
-<p>查看防火墙状态</p>
-<blockquote>
-<p>firewall-cmd –state</p>
-</blockquote>
-<p>防火墙启动 关闭 重启</p>
-<blockquote>
-<p>service firewalld start</p>
-</blockquote>
-<blockquote>
-<p>service firewalld restart</p>
-</blockquote>
-<blockquote>
-<p>service firewalld stop</p>
-</blockquote>
-<p>查看防火墙规则列表</p>
-<blockquote>
-<p>firewall-cmd –list-all</p>
-</blockquote>
-<p>查询端口是否开放</p>
-<blockquote>
-<p>firewall-cmd –query-port=8080/tcp</p>
-</blockquote>
-<p>开放某端口</p>
-<blockquote>
-<p>firewall-cmd –permanent –add-port=80/tcp</p>
-</blockquote>
-<p>关闭某端口</p>
-<blockquote>
-<p>firewall-cmd –permanent –remove-port=80/tcp</p>
-</blockquote>
-<p>重启防火墙 （重新加载配置）</p>
-<blockquote>
-<p>firewall-cmd –reload</p>
-</blockquote>
-<h4 id="ufw"><a href="#ufw" class="headerlink" title="ufw"></a>ufw</h4><p>查看状态</p>
-<blockquote>
-<p>ufw status</p>
-</blockquote>
-<p>开启关闭防火墙</p>
-<blockquote>
-<p>ufw enable</p>
-<p>ufw disable</p>
-</blockquote>
-<p>开放关闭端口</p>
-<blockquote>
-<p>ufw deny 53</p>
-<p>ufw allow 53</p>
-</blockquote>
-<h4 id="并发测试工具"><a href="#并发测试工具" class="headerlink" title="并发测试工具"></a>并发测试工具</h4><p>安装</p>
-<blockquote>
-<p>yum install httpd-tools</p>
-</blockquote>
-<p>使用</p>
-<blockquote>
-<p>ab -n 1000 -c 100 <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com/</a></p>
-</blockquote>
-<blockquote>
-<p>-n 总请求数</p>
-</blockquote>
-<blockquote>
-<p>-c 并发数</p>
-</blockquote>
-<blockquote>
-<p>-k 是否开启长链接</p>
-</blockquote>
-<p><img src="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p21" alt="9654ee241d4f1294d9b02afe62404326.png"></p>
-<p><img src="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p22" alt="c734a2ed88b98202c1569438cfb321f8.png"></p>
-<p><img src="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p23" alt="7817e4298541aa4abef63689dc835afe.png"></p>
-<h4 id="ipv6-虚拟网卡命令"><a href="#ipv6-虚拟网卡命令" class="headerlink" title="ipv6 虚拟网卡命令"></a>ipv6 虚拟网卡命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">modprobe ipv6</span><br><span class="line"></span><br><span class="line">ip tunnel add he-ipv6 mode sit remote 66.220.18.42 local 106.14.126.63 ttl 255</span><br><span class="line"></span><br><span class="line">ip link set he-ipv6 up</span><br><span class="line"></span><br><span class="line">ip addr add 2001:470:c:ece::2/64 dev he-ipv6</span><br><span class="line"></span><br><span class="line">ip route add ::/0 dev he-ipv6</span><br><span class="line"></span><br><span class="line">ip -f inet6 addr</span><br></pre></td></tr></table></figure>
-
-<h4 id="crontab-www用户执行"><a href="#crontab-www用户执行" class="headerlink" title="crontab www用户执行"></a>crontab www用户执行</h4><p>原因：</p>
-<p>laravel 的command命令由crontab执行 导致log文件的所有者为root用户</p>
-<p>正常运行是为www用户 无法写入日志 导致大量报错</p>
-<p>解决方法：选定执行用户 执行crontab 任务</p>
-<p>修改 /etc/corntab 文件即可</p>
-<p>在该文件中写的任务可以指定执行用户</p>
-<h4 id="superbench"><a href="#superbench" class="headerlink" title="superbench"></a>superbench</h4><blockquote>
-<p>wget -qO- –no-check-certificate <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/oooldking/script/master/superbench.sh">https://raw.githubusercontent.com/oooldking/script/master/superbench.sh</a> | bash</p>
-</blockquote>
-<p><img src="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p24" alt="b075fc658a5f5f5d4775d1130765a007.png"></p>
-<p><img src="evernotecid://9FEBF782-627D-4E65-BBC1-7CC5F942A80A/appyinxiangcom/25316149/ENResource/p25" alt="0315326b3b0c3ef45d2274dfdf5b8a14.png"></p>
-<h4 id="nps"><a href="#nps" class="headerlink" title="nps"></a>nps</h4><p>nps安装后的文件目录：</p>
-<blockquote>
-<p>/etc/nps</p>
-</blockquote>
-<p>nps可视化页面：</p>
-<blockquote>
-<p>IP:8080</p>
-</blockquote>
-<p>连接客户端连接服务端命令：</p>
-<blockquote>
-<p>./npc -server=106.14.126.63:8024 -vkey=wox6skcyhax3vwil -type=tcp</p>
-</blockquote>
-
+  <main class="main" role="main">
+  <article class="article article-links article-type-list" itemscope="">
+  <header class="article-header">
+    <h1 itemprop="title">友情链接</h1>
+    <p class="text-muted">
+      Welcome to the exchange link, you can leave a message on this page
+    </p>
+  </header>
+  <div class="article-body">
+    <div class="row">
       
     </div>
-    <div class="article-footer">
-      <blockquote class="mt-2x">
-  <ul class="post-copyright list-unstyled">
-    
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="http://leckkk.github.io/2020/07/21/Linux%20Tip/" title="Linux Tip" target="_blank" rel="external">http://leckkk.github.io/2020/07/21/Linux Tip/</a>
-    </li>
-    
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-</blockquote>
-
-
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://github.com/leckkk" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/leckkk" target="_blank"><span class="text-dark">leck</span><small class="ml-1x">Devops</small></a></h3>
-        <div>php后端工程师、go后端学习中。</div>
-      </div>
-    </figure>
   </div>
-</div>
+</article>
 
-
-    </div>
-  </article>
   
-    
   <section id="comments">
   	
       <div id="vcomments"></div>
@@ -502,36 +326,6 @@
   </section>
 
 
-  
-</div>
-
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
-  
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/2020/07/21/laravel%E6%BA%90%E7%A0%81-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90/" title="自动加载解析"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2020/07/21/nginx/" title="nginx配置"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
-  
-  
-  
-  <div class="bar-right">
-    
-    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
-    
-  </div>
-  </div>
-</nav>
-  
 
 
 </main>
@@ -587,12 +381,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 <script src="/js/insight.js"></script>
 
 
-
-
-
-
-   
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
